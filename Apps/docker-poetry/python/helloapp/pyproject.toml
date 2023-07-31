@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "helloapp"
+version = "0.1.0"
+description = ""
+authors = ["Your Name <you@example.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+uvicorn = {extras = ["standard"], version = "^0.23.1"}
+fastapi = "^0.100.1"
+redis = "^4.6.0"
+
+[tool.poetry.scripts]
+start = "helloapp.__init__:start"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

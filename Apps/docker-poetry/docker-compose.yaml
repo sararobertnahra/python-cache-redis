@@ -1,0 +1,26 @@
+services:
+
+    redis:
+        image: redis/redis-stack:latest
+        ports: 
+            - "6379:6379"
+
+    helloapp8001:
+        build: python/helloapp/
+        environment:
+            - CASA="Sara"
+            - REDIS="redis"
+        ports:
+            - "8001:5000"
+        depends_on: 
+            - redis
+
+    helloapp8000:
+        build: python/helloapp/
+        environment:
+            - CASA="Caio"
+            - REDIS="redis"
+        ports:
+            - "8000:5000"
+        depends_on: 
+            - redis

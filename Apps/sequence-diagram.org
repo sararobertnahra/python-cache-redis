@@ -1,0 +1,28 @@
+title Diagrama de Sequência para Compreender Cache
+
+entity ClienteA
+entity ClienteB
+entity Servidor
+entity App8000
+entity App8001
+database Redis
+database SQL
+note right of Redis: Os dados possuem\nTempo de Vida
+
+
+ClienteA->Servidor:
+ClienteB->Servidor:
+
+Servidor->App8000:
+Servidor->App8001:
+
+App8000->Redis: Tem chave? GET MinhaVriávelÉ
+Redis->App8000: nil
+App8000->SQL: SELELCT VALOR FROM TABELA WHERE KEY=MinhaVriávelÉ
+SQL->App8000: "Caio"
+App8000->Redis: SET MinhaVriávelÉ "Caio"
+App8000-->ClienteA: {Key,Caio}
+
+App8001->Redis: Tem chave MinhaVriávelÉ? GET MinhaVriávelÉ
+Redis->App8001: "Caio"
+App8001-->ClienteB: {Key,Caio}
